@@ -28,5 +28,11 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.4",
     "gulp-watch": "^4.3.5"
+  },
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "jquery": "^3.3.1",
+    "font-awesome": "^4.7.0",
+    "popper.js": "^1.14.3"
   }
 }

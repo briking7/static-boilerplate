@@ -10,6 +10,10 @@ Features:
 * ES6 minification & bundling
 * Live injection/reload with BrowserSync 
 
+### Ian's Fork Notes
+
+This particular fork adds Bootstrap, jQuery, and Popper.js. This fork also removes grid.scss in favor of Bootstrap.
+
 ### Getting Started
 
 Clone the repo using `git clone` or by clicking the *Download ZIP* button to the right.
@@ -55,4 +59,3 @@ gulp deploy
 ### Credits
 
 - Responsive grid from [Skeleton](http://getskeleton.com) by [Dave Gamache](https://github.com/dhg)
-

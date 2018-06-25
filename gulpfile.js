@@ -30,6 +30,7 @@ var paths = {
     this.dist.images     = this.dist.root + '/images';
     this.dist.javascript = this.dist.root + '/js';
     this.dist.libs       = this.dist.root + '/js/libs';
+    this.dist.fonts       = this.dist.root + '/fonts';
 
     return this;
   },
@@ -46,12 +47,22 @@ gulp.task('serve', () => {
   });
 });
 
+gulp.task('icons', function() { 
+  return gulp.src('./node_modules/font-awesome/fonts/**.*') 
+    .pipe(gulp.dest('dist/fonts')); 
+});
+
 gulp.task('styles', () => {
   gulp.src([paths.src.sass])
     .pipe(sassGlob())
     .on('error', util.log)
     .pipe(sass({
-      includePaths: ['src/scss'],
+      outPutStyle: 'compressed',
+      includePaths: [
+        'node_modules/bootstrap/scss',
+        'node_modules/font-awesome/scss',
+        'src/scss'
+      ],
     }))
     .on('error', util.log)
     .pipe(prefixer('last 2 versions'))
@@ -78,6 +89,22 @@ gulp.task('templates', () => {
     .on('error', util.log)
     .pipe(gulp.dest(paths.dist.root))
     .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('jquery', function(){
+  return gulp.src('./node_modules/jquery/dist/jquery.min.js') 
+    .pipe(gulp.dest('dist/js/libs')); 
+});
+
+gulp.task('popper', function(){
+  return gulp.src('./node_modules/popper.js/dist/popper.min.js') 
+    .pipe(gulp.dest('dist/js/libs')); 
+});
+
+
+gulp.task('bootstrap-js', function(){
+  return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js') 
+    .pipe(gulp.dest('dist/js/libs')); 
 });
 
 /*
@@ -138,4 +165,4 @@ gulp.task('deploy', () => {
     .pipe(ghPages());
 });
 
-gulp.task('default', ['watch', 'serve', 'images', 'files', 'styles', 'scripts', 'templates']);
+gulp.task('default', ['watch', 'serve', 'images', 'files', 'styles', 'scripts', 'templates', 'icons', 'jquery', 'popper', 'bootstrap-js']);
