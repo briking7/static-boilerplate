@@ -17,7 +17,7 @@ const babel       = require('gulp-babel');
 
 var paths = {
   src: { root: 'src' },
-  dist: { root: 'dist' },
+  docs: { root: 'docs' },
   init: function() {
     this.src.sass        = this.src.root + '/scss/main.scss';
     this.src.templates   = this.src.root + '/**/*.hbs';
@@ -26,11 +26,11 @@ var paths = {
     this.src.images      = this.src.root + '/images/**/*.{jpg,jpeg,svg,png,gif}';
     this.src.files       = this.src.root + '/*.{html,txt}';
 
-    this.dist.css        = this.dist.root + '/css';
-    this.dist.images     = this.dist.root + '/images';
-    this.dist.javascript = this.dist.root + '/js';
-    this.dist.libs       = this.dist.root + '/js/libs';
-    this.dist.fonts       = this.dist.root + '/fonts';
+    this.docs.css        = this.docs.root + '/css';
+    this.docs.images     = this.docs.root + '/images';
+    this.docs.javascript = this.docs.root + '/js';
+    this.docs.libs       = this.docs.root + '/js/libs';
+    this.docs.fonts       = this.docs.root + '/fonts';
 
     return this;
   },
@@ -38,7 +38,7 @@ var paths = {
 
 gulp.task('serve', () => {
   browserSync.init({
-    server: paths.dist.root,
+    server: paths.docs.root,
     open: false,
     notify: false,
 
@@ -49,7 +49,7 @@ gulp.task('serve', () => {
 
 gulp.task('icons', function() { 
   return gulp.src('./node_modules/font-awesome/fonts/**.*') 
-    .pipe(gulp.dest('dist/fonts')); 
+    .pipe(gulp.dest('docs/fonts')); 
 });
 
 gulp.task('styles', () => {
@@ -67,7 +67,7 @@ gulp.task('styles', () => {
     .on('error', util.log)
     .pipe(prefixer('last 2 versions'))
     .on('error', util.log)
-    .pipe(gulp.dest(paths.dist.css))
+    .pipe(gulp.dest(paths.docs.css))
     .pipe(browserSync.reload({stream: true}));
 });
 
@@ -87,24 +87,24 @@ gulp.task('templates', () => {
       extname: '.html',
     }))
     .on('error', util.log)
-    .pipe(gulp.dest(paths.dist.root))
+    .pipe(gulp.dest(paths.docs.root))
     .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('jquery', function(){
-  return gulp.src('./node_modules/jquery/dist/jquery.min.js') 
-    .pipe(gulp.dest('dist/js/libs')); 
+  return gulp.src('./node_modules/jquery/docs/jquery.min.js') 
+    .pipe(gulp.dest('docs/js/libs')); 
 });
 
 gulp.task('popper', function(){
-  return gulp.src('./node_modules/popper.js/dist/popper.min.js') 
-    .pipe(gulp.dest('dist/js/libs')); 
+  return gulp.src('./node_modules/popper.js/docs/popper.min.js') 
+    .pipe(gulp.dest('docs/js/libs')); 
 });
 
 
 gulp.task('bootstrap-js', function(){
-  return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js') 
-    .pipe(gulp.dest('dist/js/libs')); 
+  return gulp.src('./node_modules/bootstrap/docs/js/bootstrap.min.js') 
+    .pipe(gulp.dest('docs/js/libs')); 
 });
 
 /*
@@ -119,11 +119,11 @@ gulp.task('scripts', () => {
     .on('error', util.log)
     .pipe(uglify())
     .on('error', util.log)
-    .pipe(gulp.dest(paths.dist.javascript))
+    .pipe(gulp.dest(paths.docs.javascript))
     .pipe(browserSync.reload({stream: true}));
 
   /*
-  * Uglify JS libs and move to dist folder
+  * Uglify JS libs and move to docs folder
   */
   gulp.src([paths.src.libs])
     .pipe(uglify())
@@ -132,18 +132,18 @@ gulp.task('scripts', () => {
       suffix: '.min',
     }))
     .on('error', util.log)
-    .pipe(gulp.dest(paths.dist.libs))
+    .pipe(gulp.dest(paths.docs.libs))
     .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('images', () => {
   gulp.src([paths.src.images])
-    .pipe(gulp.dest(paths.dist.images));
+    .pipe(gulp.dest(paths.docs.images));
 });
 
 gulp.task('files', () => {
   gulp.src([paths.src.files])
-    .pipe(gulp.dest(paths.dist.root));
+    .pipe(gulp.dest(paths.docs.root));
 });
 
 watch(paths.src.images, () => {
@@ -161,7 +161,7 @@ gulp.task('watch', () => {
 });
 
 gulp.task('deploy', () => {
-  return gulp.src([paths.dist.root + '/**/*'])
+  return gulp.src([paths.docs.root + '/**/*'])
     .pipe(ghPages());
 });
 
