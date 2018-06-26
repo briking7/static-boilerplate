@@ -92,18 +92,18 @@ gulp.task('templates', () => {
 });
 
 gulp.task('jquery', function(){
-  return gulp.src('./node_modules/jquery/docs/jquery.min.js') 
+  return gulp.src('./node_modules/jquery/dist/jquery.min.js') 
     .pipe(gulp.dest('docs/js/libs')); 
 });
 
 gulp.task('popper', function(){
-  return gulp.src('./node_modules/popper.js/docs/popper.min.js') 
+  return gulp.src('./node_modules/popper.js/dist/popper.min.js') 
     .pipe(gulp.dest('docs/js/libs')); 
 });
 
 
 gulp.task('bootstrap-js', function(){
-  return gulp.src('./node_modules/bootstrap/docs/js/bootstrap.min.js') 
+  return gulp.src('./node_modules/bootstrap/dist/js/bootstrap.min.js') 
     .pipe(gulp.dest('docs/js/libs')); 
 });
 
