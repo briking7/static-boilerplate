@@ -14,6 +14,26 @@ Features:
 
 This particular fork adds Bootstrap, jQuery, and Popper.js. This fork also removes grid.scss in favor of Bootstrap.
 
+### Quick Setup
+
+Add this to your `~/.bash_profile` for a quick command to set up a static boilerplate:
+
+```
+# $1 = website domain name
+new_static_site(){
+  cd ~/workspace-html/
+  git clone git@github.com:ianrandmckenzie/static-boilerplate.git
+  mv static-boilerplate $1
+  cd $1
+  rm -rf .git
+  git init
+  git add .
+  git commit -m "Initial commit for "$1
+  npm install
+  gulp
+}
+```
+
 ### Getting Started
 
 Clone the repo using `git clone` or by clicking the *Download ZIP* button to the right.
