@@ -39,7 +39,7 @@ new_static_site(){
 Clone the repo using `git clone` or by clicking the *Download ZIP* button to the right.
 
 ```sh
-git clone https://github.com/jadnco/boilerplate.git
+git clone https://github.com/briking7/static-boilerplate.git
 ```
 
 Navigate to the directory to where it was cloned.
